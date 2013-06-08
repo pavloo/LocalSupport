@@ -37,6 +37,19 @@ describe OrganizationsController do
       assigns(:organizations).should eq(result)
       assigns(:json).should eq(json)
     end
+
+    context "paging organizations" do
+
+      it 'should display first 10 organizations' do
+        page = 1
+        page_size = 10
+        result = [mock_organization]
+        Organization.should_receive(:get_page).with(1, 10) { result }
+        get :index, page: page, page_size: page_size
+        #assigns(:organizations).should eq(result)
+      end
+    end
+
   end
 
   describe "GET show" do
@@ -251,5 +264,6 @@ describe OrganizationsController do
       end
     end
   end
+
 
 end

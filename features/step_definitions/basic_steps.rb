@@ -151,3 +151,17 @@ end
 When /^I fill in "(.*?)" with "(.*?)"$/ do |field, value|
   fill_in(field, :with => value)
 end
+
+Then(/^I should be on page "([^"]*)" of "([^"]*)"$/) do |current, range|
+  expect(current).to_not have_link(current)
+
+  array = (1..range.to_i).to_a
+  array.delete(current.to_i)
+  array.each do |page_number|
+    expect(page_number).to have_link(page_number)
+  end
+end
+
+Given(/^"([^"]*)" organizations exist$/) do |arg|
+  Organization.import_addresses 'db/data.csv', 50, false
+end

@@ -31,3 +31,7 @@ Given /^I am on the edit charity page for "(.*?)"$/ do |name1|
   org1 = Organization.find_by_name(name1)
   visit edit_organization_path org1.id
 end
+
+When(/^I navigate to page "([^"]*)"$/) do |arg|
+  click_link arg
+end

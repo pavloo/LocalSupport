@@ -17,7 +17,9 @@ class OrganizationsController < ApplicationController
   # GET /organizations.json
   def index
 #@organizations = Organization.all
-    @organizations = Organization.order("updated_at DESC")
+    page = params[:page] || 1
+    page_size = params[:page_size] || 10
+    @organizations = Organization.get_page(page.to_i, page_size.to_i)
     @json = @organizations.to_gmaps4rails
     respond_to do |format|
       format.html # index.html.erb
@@ -28,7 +30,6 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
-    @organization = Organization.find(params[:id])
     @json = @organization.to_gmaps4rails
     respond_to do |format|
       format.html # show.html.erb

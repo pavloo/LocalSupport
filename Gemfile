@@ -69,4 +69,5 @@ end
 
 gem 'therubyracer'
 gem 'gmaps4rails'
+gem 'kaminari'
 #gem 'mongrel'
