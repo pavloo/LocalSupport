@@ -96,7 +96,7 @@ class Organization < ActiveRecord::Base
   def self.get_page(page, page_size)
     page = Integer page
     page_size = Integer page_size
-
+    Organization.order('updated_at DESC').paginate :page => page, :per_page => page_size
   end
 
   private
