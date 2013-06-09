@@ -38,15 +38,30 @@ describe OrganizationsController do
       assigns(:json).should eq(json)
     end
 
-    context "paging organizations" do
-
+    context "pagination" do
       it 'should display first 10 organizations' do
-        page = 1
-        page_size = 10
+        page = '1'
+        page_size = '10'
         result = [mock_organization]
-        Organization.should_receive(:get_page).with(1, 10) { result }
+        json='my markers'
+        result.should_receive(:to_gmaps4rails).and_return(json)
+        Organization.should_receive(:get_page).with(page, page_size).and_return(result)
+        Organization.should_receive(:all).and_return(result)
         get :index, page: page, page_size: page_size
-        #assigns(:organizations).should eq(result)
+        assigns(:organizations).should eq(result)
+        assigns(:json).should eq(json)
+      end
+
+      it 'should validate whether input is correct' do
+        page = 'bad'
+        page_size = 'bad'
+        error_message = 'Error!'
+        Organization.should_receive(:get_page).with(page, page_size).and_raise(ArgumentError, error_message)
+        get :index, page: page, page_size: page_size
+
+        expect(response.body).to eq error_message
+        #Expect to return http error with code 422: Unprocessable Entity
+        expect(response.status).to eq 422
       end
     end
 

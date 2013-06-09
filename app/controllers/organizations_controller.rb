@@ -17,10 +17,15 @@ class OrganizationsController < ApplicationController
   # GET /organizations.json
   def index
 #@organizations = Organization.all
-    page = params[:page] || 1
-    page_size = params[:page_size] || 10
-    @organizations = Organization.get_page(page.to_i, page_size.to_i)
-    @json = @organizations.to_gmaps4rails
+    page = params[:page] || '1'
+    page_size = params[:page_size] || '10'
+    begin
+      @organizations = Organization.get_page(page, page_size)
+    rescue ArgumentError => e
+      render text: e.message, status: 422
+      return
+    end
+    @json = Organization.all.to_gmaps4rails
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @organizations }

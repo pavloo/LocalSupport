@@ -69,5 +69,5 @@ end
 
 gem 'therubyracer'
 gem 'gmaps4rails'
-gem 'kaminari'
+gem 'will_paginate'
 #gem 'mongrel'
