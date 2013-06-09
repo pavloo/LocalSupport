@@ -130,6 +130,19 @@ describe Organization do
     end
   end
 
+  #TODO: Pavel Use FactoryGirl to populate db wih a few tens of orgs
+  describe 'pagination' do
+    it 'should raise an ArgumentError' do
+       -> {Organization.get_page('bad', 'bad2')}.
+           should raise_error ArgumentError
+    end
+
+    #TODO: Pavel
+    it 'should return paginated organizations' do
+
+    end
+  end
+
   it 'must have search by keyword' do
     Organization.should respond_to(:search_by_keyword)
   end

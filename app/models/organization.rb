@@ -92,6 +92,13 @@ class Organization < ActiveRecord::Base
     end
   end
 
+  #wrapper methods for will_paginate gem method calls
+  def self.get_page(page, page_size)
+    page = Integer page
+    page_size = Integer page_size
+
+  end
+
   private
 
   def remove_errors_with_address

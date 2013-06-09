@@ -52,6 +52,10 @@ describe OrganizationsController do
         assigns(:json).should eq(json)
       end
 
+      #As links for pagination are in the view and user
+      #doesn't input page number directly, we should
+      #process input on API level: return http with proper code
+      #in case of bad input
       it 'should validate whether input is correct' do
         page = 'bad'
         page_size = 'bad'
