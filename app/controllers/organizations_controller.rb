@@ -35,6 +35,7 @@ class OrganizationsController < ApplicationController
   # GET /organizations/1
   # GET /organizations/1.json
   def show
+    @organization = Organization.find(params[:id])
     @json = @organization.to_gmaps4rails
     respond_to do |format|
       format.html # show.html.erb

@@ -132,6 +132,12 @@ describe Organization do
 
   #TODO: Pavel Use FactoryGirl to populate db wih a few tens of orgs
   describe 'pagination' do
+    before(:each) do
+      (1..50).each do 
+        Gmaps4rails.should_receive(:geocode)
+        FactoryGirl.build(:organization).save!
+      end
+    end
     it 'should raise an ArgumentError' do
        -> {Organization.get_page('bad', 'bad2')}.
            should raise_error ArgumentError
