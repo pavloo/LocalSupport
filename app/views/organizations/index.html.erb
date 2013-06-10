@@ -17,6 +17,10 @@
     <% end %>
   </table>
 </div>
+<div class="pagination">
+  <!--Pavel: that if was added to avoid calling this method when search is performed(based of failing cukes)-->
+  <%= will_paginate @organizations if @organizations.respond_to?(:total_pages) %>
+</div>
 <br/>
 <div style="width:50%;float:left">
   <%= link_to 'New Organization', new_organization_path %>

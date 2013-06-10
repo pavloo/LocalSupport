@@ -143,7 +143,6 @@ describe Organization do
            should raise_error ArgumentError
     end
 
-    #TODO: Pavel
     it 'should return paginated organizations' do
       @expected_orgs = Organization.order("updated_at DESC").limit(10).find_all.to_a
       expect(Organization.get_page(1, 10)).to eq @expected_orgs

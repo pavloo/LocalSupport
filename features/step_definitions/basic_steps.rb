@@ -158,10 +158,10 @@ Then(/^I should be on page "([^"]*)" of "([^"]*)"$/) do |current, range|
   array = (1..range.to_i).to_a
   array.delete(current.to_i)
   array.each do |page_number|
-    expect(page_number).to have_link(page_number)
+    expect(page).to have_link(page_number)
   end
 end
 
 Given(/^"([^"]*)" organizations exist$/) do |arg|
-  Organization.import_addresses 'db/data.csv', 50, false
+  Organization.import_addresses 'db/data.csv', arg.to_i, false
 end
