@@ -6,9 +6,9 @@
     <%= submit_tag "Search", :class => 'btn btn-info' %>
 <% end %>
 
-<div class="table table-bordered">
+<div id='organizations' class="table table-bordered">
   <table>
-
+    <!-- TODO: pavel: put in separate partial -->
     <% @organizations.each do |organization| %>
         <tr>
           <td><u><%= link_to organization.name, organization %></u><br/>
@@ -17,6 +17,7 @@
     <% end %>
   </table>
 </div>
+
 <div class="pagination">
   <!--Pavel: that if was added to avoid calling this method when search is performed(based of failing cukes)-->
   <%= will_paginate @organizations if @organizations.respond_to?(:total_pages) %>
@@ -25,6 +26,7 @@
 <div style="width:50%;float:left">
   <%= link_to 'New Organization', new_organization_path %>
 </div>
+
 
 <% content_for :map do %>
     <br/><br/>

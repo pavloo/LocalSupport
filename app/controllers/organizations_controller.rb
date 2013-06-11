@@ -16,7 +16,6 @@ class OrganizationsController < ApplicationController
   # GET /organizations
   # GET /organizations.json
   def index
-#@organizations = Organization.all
     page = params[:page] || '1'
     page_size = params[:page_size] || '10'
     begin
@@ -26,6 +25,7 @@ class OrganizationsController < ApplicationController
       return
     end
     @json = Organization.all.to_gmaps4rails
+    #TODO: pavel: render a partial if request.xhr?
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @organizations }
