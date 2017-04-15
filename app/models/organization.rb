@@ -50,7 +50,7 @@ class Organization < ActiveRecord::Base
       date_removed: 'date removed'
   }
 
-  def self.create_from_array(row, validate)
+  def self.create_from_array(row, validate = true)
     check_columns_in(row)
     return nil if row[@@column_mappings[:date_removed]]
     address = self.parse_address(row[@@column_mappings[:address]])
